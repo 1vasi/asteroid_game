@@ -4,8 +4,8 @@ from constants import *
 
 
 class Player(CircleShape):
-    def __init__(self, x, y, radius):
-        super().__init__(x, y,radius)
+    def __init__(self, x, y):
+        super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0 
         
     
@@ -22,7 +22,7 @@ class Player(CircleShape):
 
 
     def rotate(self,dt):
-        self.rotation = PLAYER_TURN_SPEED * dt
+        self.rotation += PLAYER_TURN_SPEED * dt
     
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -33,9 +33,15 @@ class Player(CircleShape):
 
         if keys[pygame.K_a]:
             self.rotate(dt*-1)
-            self.move(dt*-1)
+            
         if keys[pygame.K_d]:
             self.rotate(dt)
+        
+        if keys[pygame.K_s]:
+            self.move(dt*-1)
+            
+        if keys[pygame.K_w]:
             self.move(dt)
+            
     
     
